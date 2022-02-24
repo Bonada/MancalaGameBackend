@@ -14,8 +14,8 @@ const io = socketio(server, {
 
 io.on('connection', client => {
     console.log(client);
-    client.on('test', (message, friend) => {
-        client.to(friend).emit('recv', message);
+    client.on('reqgame', (friend) => {
+        client.to(friend).emit('recvgame', friend);
     })
 })
 
