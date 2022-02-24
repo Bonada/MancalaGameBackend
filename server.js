@@ -1,5 +1,13 @@
-const io = require('socket.io')(3000)
+const express = require('express')
+const http = require('http')
+const socketio = require('socket.io')
+const app = express()
 
-io.on("connection", socket => {
-    console.log(socket.id)
+const server = http.createServer(app)
+const io = socketio(server)
+
+io.on('connection', client => {
+    console.log(client);
 })
+
+server.listen(process.env.PORT || 4000)
