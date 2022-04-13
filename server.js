@@ -12,10 +12,22 @@ const io = socketio(server, {
     },
 })
 
+let gameObj = {
+    score1: 0,
+    score2: 0,
+    cups: new Array(12).fill(4),
+}
+
 io.on('connection', client => {
     console.log(client);
+
+    //initalize game
     client.on('reqgame', (friend) => {
         client.to(friend).emit('recvgame', friend);
+    })
+
+    //place balls
+    client.on('moveballs', cupIndex => {
     })
 })
 
