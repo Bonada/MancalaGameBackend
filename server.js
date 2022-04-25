@@ -18,16 +18,20 @@ let gameObj = {
     cups: new Array(12).fill(4),
 }
 
+let gameid = '';
+
 io.on('connection', client => {
     console.log(client);
 
     //initalize game
     client.on('reqgame', (friend) => {
+        gameid = friend;
         client.to(friend).emit('recvgame', friend);
     })
 
     //place balls
-    client.on('moveballs', cupIndex => {
+    client.on('movemade', moveObj => {
+        client.to(gameid).emit('movemade', moveObj);
     })
 })
 
