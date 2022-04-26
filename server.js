@@ -25,13 +25,18 @@ io.on('connection', client => {
 
     //initalize game
     client.on('reqgame', (friend) => {
-        gameid = friend;
         client.to(friend).emit('recvgame', friend);
     })
 
     //place balls
     client.on('movemade', moveObj => {
         client.to(gameid).emit('movemade', moveObj);
+    })
+
+    //join game
+    client.on('join-game', game => {
+        gameid = game;
+        client.join(game);
     })
 })
 
